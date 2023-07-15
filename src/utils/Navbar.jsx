@@ -3,7 +3,7 @@ import { UseProjectContext } from '../store/context'
 
 const Navbar = ({ types }) => {
   const {
-    viewType: { type, title, buttonTitle },
+    viewType: { type },
     setViewType,
   } = UseProjectContext()
 
@@ -17,7 +17,7 @@ const Navbar = ({ types }) => {
       }
     })
   }
-  console.log('😇 L-15 in Navbar.jsx=> ', UseProjectContext().viewType)
+
   return (
     <nav>
       <ul className='d-flex justify-content-end gap-3'>
