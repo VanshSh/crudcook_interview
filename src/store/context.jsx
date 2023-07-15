@@ -1,4 +1,5 @@
 import { useState, createContext, useContext, useEffect } from 'react'
+import Toasts from '../utils/Toasts'
 
 const ProjectContext = createContext()
 
@@ -13,7 +14,17 @@ export const ProjectContextProvider = ({ children }) => {
     buttonTitle: 'Create Post',
     type: 'post',
   })
+
+  const [showToast, setShowToast] = useState({
+    show: false,
+    message: '',
+    type: '',
+    color: '',
+  })
+
+  // Fetching data from API
   const fetchData = async (type) => {
+    setData((prev) => ({ ...prev, loading: true, error: null }))
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/${type}s`
     )
@@ -26,17 +37,61 @@ export const ProjectContextProvider = ({ children }) => {
       return
     } else {
       const data = await response.json()
-      setData((prev) => ({ ...prev, getData: data }))
+      setData((prev) => ({
+        ...prev,
+        getData: data,
+        loading: false,
+        error: null,
+      }))
     }
   }
   useEffect(() => {
-    setData((prev) => ({ ...prev, loading: true, error: null }))
     fetchData(viewType.type)
-    setData((prev) => ({ ...prev, loading: false, error: null }))
   }, [viewType.type])
 
+  // Delete post/user
+  const deleteData = async (id) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/${viewType.type}s/${id}`,
+      {
+        method: 'DELETE',
+      }
+    )
+    if (response.ok) {
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: `${viewType.type} deleted successfully`,
+          color: 'success',
+          type: 'success',
+          event: 'delete',
+        }
+      })
+    } else {
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: 'Something went wrong',
+          color: 'warning',
+          type: 'warning',
+          event: 'delete',
+        }
+      })
+    }
+  }
   return (
-    <ProjectContext.Provider value={{ viewType, setViewType }}>
+    <ProjectContext.Provider
+      value={{
+        viewType,
+        setViewType,
+        data,
+        deleteData,
+        showToast,
+        setShowToast,
+      }}
+    >
       {children}
     </ProjectContext.Provider>
   )
