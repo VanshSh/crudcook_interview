@@ -4,7 +4,7 @@ const ProjectContext = createContext()
 
 export const ProjectContextProvider = ({ children }) => {
   const [viewType, setViewType] = useState({
-    title: 'Posts',
+    title: 'posts',
     buttonTitle: 'Create Post',
     type: 'post',
   })
@@ -14,3 +14,5 @@ export const ProjectContextProvider = ({ children }) => {
     </ProjectContext.Provider>
   )
 }
+
+export const UseProjectContext = () => useContext(ProjectContext)
