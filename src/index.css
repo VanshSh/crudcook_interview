@@ -92,3 +92,47 @@
   .rotate-180 svg{
     transform: rotate(180deg);
   }
+.transform-50{
+    transform: translate(-50%,-50%);
+
+}
+
+.createFormModal{
+    border-radius: 2.5rem;
+background: #1E222E;
+}
+
+.createFormModal__header .heading{
+    color: #FFF;
+font-family: Montserrat;
+font-size: 2rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.label{
+    color: #D6D6D6;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+    padding-left: 5px;
+    margin-bottom: 0.5rem;
+
+}
+
+input{
+    border-radius: 2.75rem;
+background: #2E3549;
+border: none;
+width: 15rem;
+padding: .5rem;
+}
+.pointer-event-none{
+    pointer-events: none;
+    opacity: 0.5;
+}

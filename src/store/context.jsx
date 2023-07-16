@@ -9,6 +9,7 @@ export const ProjectContextProvider = ({ children }) => {
     loading: false,
     error: null,
   })
+  const [showFormModal, setShowFormModal] = useState(false)
   const [viewType, setViewType] = useState({
     title: 'post',
     buttonTitle: 'Create Post',
@@ -82,6 +83,45 @@ export const ProjectContextProvider = ({ children }) => {
       })
     }
   }
+
+  // Create new post/user
+  const createNewDocument = async (data) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/${viewType.type}s`,
+      {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }
+    )
+    if (response.ok) {
+      setShowFormModal(!showFormModal)
+      fetchData(viewType.type)
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: `${viewType.type} created successfully`,
+          color: 'success',
+          type: 'success',
+          event: 'create',
+        }
+      })
+    } else {
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: 'Something went wrong',
+          color: 'warning',
+          type: 'warning',
+          event: 'create',
+        }
+      })
+    }
+  }
   return (
     <ProjectContext.Provider
       value={{
@@ -89,8 +129,11 @@ export const ProjectContextProvider = ({ children }) => {
         setViewType,
         data,
         deleteData,
+        showFormModal,
+        setShowFormModal,
         showToast,
         setShowToast,
+        createNewDocument,
       }}
     >
       {children}
