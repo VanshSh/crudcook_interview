@@ -88,3 +88,7 @@
   .pointer{
     cursor: pointer;
   }
+
+  .rotate-180 svg{
+    transform: rotate(180deg);
+  }
