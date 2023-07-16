@@ -6,9 +6,17 @@ import UserList from './users/UserList'
 import ReactDOM from 'react-dom'
 import Toasts from './utils/Toasts'
 import CreateNewDocumentForm from './utils/CreateNewDocumentForm'
+import UpdateDocumentForm from './utils/UpdateDocumentForm'
 
 const App = () => {
-  const { viewType, data, showFormModal } = UseProjectContext()
+  const {
+    viewType,
+    data,
+    showFormModal,
+    showUpdateModalForm,
+    currentPostData,
+    currentUserData,
+  } = UseProjectContext()
 
   const newUserData = [
     {
@@ -123,6 +131,25 @@ const App = () => {
           )}
           {viewType.type === 'user' && showFormModal && (
             <CreateNewDocumentForm type='User' fields={newUserData} />
+          )}
+        </div>,
+        document.getElementById('formModal')
+      )}
+      {ReactDOM.createPortal(
+        <div className='position-absolute top-50 transform-50 start-50 w-50  '>
+          {viewType.type === 'post' && showUpdateModalForm && (
+            <UpdateDocumentForm
+              type='Post'
+              fields={newPostData}
+              values={currentPostData}
+            />
+          )}
+          {viewType.type === 'user' && showUpdateModalForm && (
+            <UpdateDocumentForm
+              type='User'
+              fields={newUserData}
+              values={currentUserData}
+            />
           )}
         </div>,
         document.getElementById('formModal')

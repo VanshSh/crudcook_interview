@@ -4,9 +4,24 @@ import SpinnerComp from '../utils/Spinner'
 import Pagination from '../utils/Pagination'
 
 const PostList = ({ data }) => {
-  const { deleteData } = UseProjectContext()
+  const {
+    deleteData,
+    showUpdateModalForm,
+    setshowUpdateModalForm,
+    setCurrentPostData,
+  } = UseProjectContext()
   const { getData, loading, error } = data
-
+  const openModal = (userId, title, id, body) => {
+    setshowUpdateModalForm((prev) => !prev)
+    setCurrentPostData((prev) => ({
+      ...prev,
+      userid: `${userId}`,
+      title,
+      id,
+      username: '',
+      body,
+    }))
+  }
   return (
     <div className='showListDiv py-4 px-5'>
       <div className='row'>
@@ -20,13 +35,16 @@ const PostList = ({ data }) => {
         </div>
       ) : (
         <Pagination itemsPerPage='6'>
-          {getData.map(({ userId, title, id }) => {
+          {getData.map(({ userId, title, id, body }) => {
             return (
               <div key={id} className='row my-3'>
                 <p className='showListValues col-3 text-center'>#{id}</p>
                 <p className='showListValues text-left col-6'>{title}</p>
                 <p className='showListValues d-flex align-item-center justify-content-center gap-5 col-3'>
-                  <span className='pointer'>
+                  <span
+                    className='pointer'
+                    onClick={() => openModal(id, title, userId, body)}
+                  >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       width='24'

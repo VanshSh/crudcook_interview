@@ -10,20 +10,21 @@ export const ProjectContextProvider = ({ children }) => {
     error: null,
   })
   const [showFormModal, setShowFormModal] = useState(false)
+  const [showUpdateModalForm, setshowUpdateModalForm] = useState(false)
+  const [currentPostData, setCurrentPostData] = useState({})
+  const [currentUserData, setCurrentUserData] = useState({})
   const [viewType, setViewType] = useState({
     title: 'post',
     buttonTitle: 'Create Post',
     type: 'post',
   })
-
   const [showToast, setShowToast] = useState({
     show: false,
     message: '',
     type: '',
     color: '',
   })
-
-  // Fetching data from API
+  // GET Req from API
   const fetchData = async (type) => {
     setData((prev) => ({ ...prev, loading: true, error: null }))
     const response = await fetch(
@@ -46,11 +47,8 @@ export const ProjectContextProvider = ({ children }) => {
       }))
     }
   }
-  useEffect(() => {
-    fetchData(viewType.type)
-  }, [viewType.type])
 
-  // Delete post/user
+  // DELETE post/user
   const deleteData = async (id) => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/${viewType.type}s/${id}`,
@@ -84,7 +82,7 @@ export const ProjectContextProvider = ({ children }) => {
     }
   }
 
-  // Create new post/user
+  // POST new post/user
   const createNewDocument = async (data) => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/${viewType.type}s`,
@@ -97,7 +95,6 @@ export const ProjectContextProvider = ({ children }) => {
       }
     )
     if (response.ok) {
-      setShowFormModal(!showFormModal)
       fetchData(viewType.type)
       setShowToast((prev) => {
         return {
@@ -109,6 +106,7 @@ export const ProjectContextProvider = ({ children }) => {
           event: 'create',
         }
       })
+      setShowFormModal(!showFormModal)
     } else {
       setShowToast((prev) => {
         return {
@@ -120,8 +118,57 @@ export const ProjectContextProvider = ({ children }) => {
           event: 'create',
         }
       })
+      setShowFormModal(!showFormModal)
     }
   }
+
+  // PUT update a document
+  const updateDocument = async (data) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/${viewType.type}s/${data.id}`,
+
+      {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }
+    )
+    const result = await response.json()
+    if (response.ok) {
+      setshowUpdateModalForm((prev) => !prev)
+
+      fetchData(viewType.type)
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: `${viewType.type} updated successfully`,
+          color: 'success',
+          type: 'success',
+          event: 'update',
+        }
+      })
+    } else {
+      setShowToast((prev) => {
+        return {
+          ...prev,
+          show: !prev.show,
+          message: 'Something went wrong',
+          color: 'warning',
+          type: 'warning',
+          event: 'update',
+        }
+      })
+      setshowUpdateModalForm((prev) => !prev)
+    }
+  }
+
+  useEffect(() => {
+    fetchData(viewType.type)
+  }, [viewType.type])
+
   return (
     <ProjectContext.Provider
       value={{
@@ -134,6 +181,13 @@ export const ProjectContextProvider = ({ children }) => {
         showToast,
         setShowToast,
         createNewDocument,
+        showUpdateModalForm,
+        setshowUpdateModalForm,
+        updateDocument,
+        currentPostData,
+        setCurrentPostData,
+        currentUserData,
+        setCurrentUserData,
       }}
     >
       {children}

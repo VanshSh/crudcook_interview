@@ -1,26 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './Button'
 import { UseProjectContext } from '../store/context'
 
-const CreateNewDocumentForm = ({ fields, type }) => {
-  const { showFormModal, setShowFormModal, createNewDocument } =
-    UseProjectContext()
+const UpdateDocumentForm = ({ fields, type, values }) => {
+  const {
+    showUpdateModalForm,
+    setshowUpdateModalForm,
+    updateDocument,
+    currentPostData,
+  } = UseProjectContext()
   const [formData, setFormData] = useState({})
+  useEffect(() => {
+    if (values) {
+      setFormData(values)
+    }
+  }, [values])
+
   const handleChange = (e, fieldName) => {
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: e.target.value,
     }))
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission with formData
+  const handleUpdate = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      id: e.target.value,
+    }))
 
-    createNewDocument(formData)
+    // Handle form submission with formData
+    updateDocument(formData)
   }
 
   const closeModal = () => {
-    setShowFormModal(!showFormModal)
+    setshowUpdateModalForm((prev) => !prev)
   }
   const validateForm = (inputFields) => {
     for (let i = 0; i < inputFields.length; i++) {
@@ -43,7 +56,7 @@ const CreateNewDocumentForm = ({ fields, type }) => {
     <div className='createFormModal p-3'>
       <div className=' createFormModal__header'>
         <div className='d-flex align-items-center my-3'>
-          <span className='pointer ' onClick={() => closeModal()}>
+          <span className='pointer ' onClick={closeModal}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='39'
@@ -57,7 +70,7 @@ const CreateNewDocumentForm = ({ fields, type }) => {
               />
             </svg>
           </span>
-          <span className='heading col-11 text-center'>Create {type}</span>
+          <span className='heading col-11 text-center'>Edit {type}</span>
         </div>
       </div>
       <div className='createFormModal__body row mx-5 mt-5 '>
@@ -92,9 +105,9 @@ const CreateNewDocumentForm = ({ fields, type }) => {
         <Button
           props={{
             status: validateForm(fields) ? '' : 'pointer-event-none',
-            handleClick: handleSubmit,
+            handleClick: handleUpdate,
             icon: '',
-            buttonTitle: `Create ${type}`,
+            buttonTitle: `Save ${type}`,
             color: '#68ECED',
           }}
         />
@@ -103,4 +116,4 @@ const CreateNewDocumentForm = ({ fields, type }) => {
   )
 }
 
-export default CreateNewDocumentForm
+export default UpdateDocumentForm

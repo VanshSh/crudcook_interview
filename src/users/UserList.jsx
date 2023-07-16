@@ -5,7 +5,8 @@ import Pagination from '../utils/Pagination'
 
 const UserList = ({ data }) => {
   const [activeAddress, setActiveAddress] = useState({})
-  const { deleteData } = UseProjectContext()
+  const { deleteData, showUpdateModalForm, setshowUpdateModalForm } =
+    UseProjectContext()
   const { getData, loading, error } = data
   const showAddressHandler = (id) => {
     setActiveAddress((prevState) => ({
@@ -60,7 +61,10 @@ const UserList = ({ data }) => {
                   <p className='showListValues col-3 '>{user.email}</p>
                   <p className='showListValues col-3 '>{user.phone}</p>
                   <p className='showListValues d-flex align-item-center justify-content-center gap-5 col-2'>
-                    <span className='pointer'>
+                    <span
+                      className='pointer'
+                      onClick={() => setshowUpdateModalForm((prev) => !prev)}
+                    >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='24'
