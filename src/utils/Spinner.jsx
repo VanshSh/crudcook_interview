@@ -1,11 +1,11 @@
 import Spinner from 'react-bootstrap/Spinner'
 
-function BasicExample() {
+function SpinnerComp() {
   return (
-    <Spinner animation='border' role='status'>
+    <Spinner animation='grow' variant='info'>
       <span className='visually-hidden'>Loading...</span>
     </Spinner>
   )
 }
 
-export default BasicExample
+export default SpinnerComp

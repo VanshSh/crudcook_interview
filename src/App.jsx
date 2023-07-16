@@ -10,7 +10,7 @@ const App = () => {
   const { viewType, setViewType, data } = UseProjectContext()
 
   return (
-    <div className='mainBackground p-5'>
+    <div className='mainBackground py-2 px-4'>
       <Navbar types={['post', 'user']} />
       <Header props={viewType} />
       {viewType.type === 'post' ? (

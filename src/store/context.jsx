@@ -58,6 +58,7 @@ export const ProjectContextProvider = ({ children }) => {
       }
     )
     if (response.ok) {
+      fetchData(viewType.type)
       setShowToast((prev) => {
         return {
           ...prev,

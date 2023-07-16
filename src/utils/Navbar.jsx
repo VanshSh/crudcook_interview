@@ -20,7 +20,7 @@ const Navbar = ({ types }) => {
 
   return (
     <nav>
-      <ul className='d-flex justify-content-end gap-3'>
+      <ul className='d-flex justify-content-end '>
         {types.map((typeTitle) => {
           return (
             <li

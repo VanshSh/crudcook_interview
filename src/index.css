@@ -18,6 +18,12 @@
       letter-spacing: 0.04375rem;
       text-transform: uppercase;
       cursor: pointer;
+      border-right:1px solid white;
+      padding: .7rem;
+  }
+
+  .type:last-child{
+    border-right:none;
   }
   .headerTitle {
       color: #EAFAFA;
