@@ -1,9 +1,9 @@
 import { useState, createContext, useContext, useEffect } from 'react'
-import Toasts from '../utils/Toasts'
 
 const ProjectContext = createContext()
 
 export const ProjectContextProvider = ({ children }) => {
+  const [allUserName, setAllUserName] = useState([])
   const [data, setData] = useState({
     getData: [],
     loading: false,
@@ -24,6 +24,19 @@ export const ProjectContextProvider = ({ children }) => {
     type: '',
     color: '',
   })
+  // GET All user name
+
+  async function getAllUserName() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    if (response.ok) {
+      const data = await response.json()
+      const userList = data.map(({ name }) => name)
+      setAllUserName(userList)
+    } else {
+      throw new Error('Something went wrong')
+    }
+  }
+
   // GET Req from API
   const fetchData = async (type) => {
     setData((prev) => ({ ...prev, loading: true, error: null }))
@@ -167,6 +180,7 @@ export const ProjectContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchData(viewType.type)
+    getAllUserName()
   }, [viewType.type])
 
   return (
@@ -188,6 +202,8 @@ export const ProjectContextProvider = ({ children }) => {
         setCurrentPostData,
         currentUserData,
         setCurrentUserData,
+        allUserName,
+        setAllUserName,
       }}
     >
       {children}

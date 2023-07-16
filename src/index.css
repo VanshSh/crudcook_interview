@@ -2,6 +2,7 @@
   .mainBackground {
       background: #000814;
       width: 100%;
+      height: 110vh;
   }
   .activeType {
       color: #68ECED !important;
@@ -18,12 +19,11 @@
       letter-spacing: 0.04375rem;
       text-transform: uppercase;
       cursor: pointer;
-      border-right:1px solid white;
+      border-right: 1px solid white;
       padding: .7rem;
   }
-
-  .type:last-child{
-    border-right:none;
+  .type:last-child {
+      border-right: none;
   }
   .headerTitle {
       color: #EAFAFA;
@@ -73,7 +73,6 @@
       font-weight: 700;
       line-height: normal;
       letter-spacing: 0.04375rem;
-     
       text-transform: uppercase;
   }
   .showListValues {
@@ -84,55 +83,117 @@
       font-weight: 400;
       line-height: normal;
   }
+  .pointer {
+      cursor: pointer;
+  }
+  .rotate-180 svg {
+      transform: rotate(180deg);
+  }
+  .transform-50 {
+      transform: translate(-50%, -50%);
+  }
+  .createFormModal {
+      border-radius: 2.5rem;
+      background: #1E222E;
+  }
+  .createFormModal__header .heading {
+      color: #FFF;
+      font-family: Montserrat;
+      font-size: 2rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+  }
+  .label {
+      color: #D6D6D6;
+      text-align: center;
+      font-family: Montserrat;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: capitalize;
+      padding-left: 5px;
+      margin-bottom: 0.5rem;
+  }
+  input,
+  select {
+      border-radius: 2.75rem;
+      background: #2E3549;
+      border: none;
+      width: 15rem;
+      padding: .5rem;
+      color:#fff;
+  }
+  select {
+      width: 15.375rem;
+   
+      flex-shrink: 0;
+      border-radius: 0.625rem;
+      border: 1px solid #D6D6D6;
+      background: #1E222E;
+  }
+  .pointer-event-none {
+      pointer-events: none;
+      opacity: 0.5;
+  }
+  .showListDiv::-webkit-scrollbar-track, select::-webkit-scrollbar-track {
+      background: rgba(17, 24, 42, 0.50);
+      border-radius: 5px;
+  }
+  /* Styling the scrollbar thumb */
+  .showListDiv::-webkit-scrollbar-thumb,select::-webkit-scrollbar-thumb{
+      background-color: #fff;
+      /* Change to your desired color */
+      border-radius: 5px;
+      /* Change to your desired border radius */
+  }
+  /* Styling the scrollbar */
+  .showListDiv::-webkit-scrollbar,select::-webkit-scrollbar {
+      width: 8px;
+      /* Change to your desired width */
+      border-radius: 5px;
+      background-color: #f1f1f1;
+      /* Change to your desired color */
+  }
 
-  .pointer{
+  .custom-select {
+    background: red;
+    position: relative;
+    display: inline-block;
+        padding: 50px 13px 0;
+  }
+  
+  .custom-select input[type="text"] {
+    width: 200px; /* Adjust the width as needed */
+    padding: 5px;
+  }
+  
+  .custom-select select {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
+    z-index: 1;
   }
-
-  .rotate-180 svg{
-    transform: rotate(180deg);
+  .addSearchInput{
+    position: relative;
   }
-.transform-50{
-    transform: translate(-50%,-50%);
-
-}
-
-.createFormModal{
-    border-radius: 2.5rem;
-background: #1E222E;
-}
-
-.createFormModal__header .heading{
-    color: #FFF;
-font-family: Montserrat;
-font-size: 2rem;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-}
-
-.label{
-    color: #D6D6D6;
-    text-align: center;
-    font-family: Montserrat;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-transform: capitalize;
-    padding-left: 5px;
-    margin-bottom: 0.5rem;
-
-}
-
-input{
-    border-radius: 2.75rem;
-background: #2E3549;
-border: none;
-width: 15rem;
-padding: .5rem;
-}
-.pointer-event-none{
-    pointer-events: none;
-    opacity: 0.5;
-}
+  .optionSelect{
+    padding: 50px 3px 0;
+  }
+  
+ .searchInput{
+    position: absolute;
+    top: 9px;
+    width: 13rem;
+    right: 0px !important;
+    left:5px ;
+    color:white;
+    padding:3px;
+    /* transform: translate(-34%, 0%); */
+ }
