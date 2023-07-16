@@ -3,12 +3,8 @@ import Button from './Button'
 import { UseProjectContext } from '../store/context'
 
 const UpdateDocumentForm = ({ fields, type, values }) => {
-  const {
-    showUpdateModalForm,
-    setshowUpdateModalForm,
-    updateDocument,
-    currentPostData,
-  } = UseProjectContext()
+  const { setshowUpdateModalForm, updateDocument } = UseProjectContext()
+
   const [formData, setFormData] = useState({})
   useEffect(() => {
     if (values) {

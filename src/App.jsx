@@ -43,7 +43,7 @@ const App = () => {
     {
       name: 'phone',
       label: 'Phone no.',
-      type: 'number',
+      type: 'text',
       required: true,
       validation: /^[0-9]+$/,
     },
@@ -71,7 +71,7 @@ const App = () => {
     {
       name: 'zipcode',
       label: 'Zipcode',
-      type: 'number',
+      type: 'text',
       required: true,
       validation: /^[0-9]+$/,
     },

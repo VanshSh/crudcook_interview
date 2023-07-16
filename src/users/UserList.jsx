@@ -5,13 +5,36 @@ import Pagination from '../utils/Pagination'
 
 const UserList = ({ data }) => {
   const [activeAddress, setActiveAddress] = useState({})
-  const { deleteData, showUpdateModalForm, setshowUpdateModalForm } =
-    UseProjectContext()
+  const {
+    deleteData,
+    showUpdateModalForm,
+    setshowUpdateModalForm,
+    setCurrentUserData,
+  } = UseProjectContext()
   const { getData, loading, error } = data
   const showAddressHandler = (id) => {
     setActiveAddress((prevState) => ({
       ...prevState,
       [id]: !prevState[id],
+    }))
+  }
+
+  const openModal = (user) => {
+    setshowUpdateModalForm((prev) => !prev)
+
+    const { id, name, username, email, phone } = user
+
+    setCurrentUserData((prev) => ({
+      ...prev,
+      id: `${id}`,
+      name,
+      username,
+      email,
+      phone,
+      street: user.address?.street,
+      suite: user.address?.suite,
+      city: user.address?.city,
+      zipcode: user.address?.zipcode,
     }))
   }
   return (
@@ -61,10 +84,7 @@ const UserList = ({ data }) => {
                   <p className='showListValues col-3 '>{user.email}</p>
                   <p className='showListValues col-3 '>{user.phone}</p>
                   <p className='showListValues d-flex align-item-center justify-content-center gap-5 col-2'>
-                    <span
-                      className='pointer'
-                      onClick={() => setshowUpdateModalForm((prev) => !prev)}
-                    >
+                    <span className='pointer' onClick={() => openModal(user)}>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='24'
