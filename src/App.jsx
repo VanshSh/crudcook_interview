@@ -69,6 +69,37 @@ const App = () => {
     },
   ]
 
+  const newPostData = [
+    {
+      name: 'username',
+      label: 'Username',
+      type: 'text',
+      required: true,
+      validation: /^[a-zA-Z0-9]+$/,
+    },
+    {
+      name: 'userid',
+      label: 'User ID',
+      type: 'text',
+      required: true,
+      validation: /^[a-zA-Z0-9]+$/,
+    },
+    {
+      name: 'title',
+      label: 'Title',
+      type: 'text',
+      required: true,
+      validation: /^[a-zA-Z0-9 ]+$/,
+    },
+    {
+      name: 'body',
+      label: 'Body',
+      type: 'text',
+      required: true,
+      validation: /^[a-zA-Z0-9 ]+$/,
+    },
+  ]
+
   return (
     <div className='mainBackground py-2 px-4'>
       <Navbar types={['post', 'user']} />
@@ -88,7 +119,7 @@ const App = () => {
       {ReactDOM.createPortal(
         <div className='position-absolute top-50 transform-50 start-50 w-50  '>
           {viewType.type === 'post' && showFormModal && (
-            <CreateNewDocumentForm type='Post' />
+            <CreateNewDocumentForm type='Post' fields={newPostData} />
           )}
           {viewType.type === 'user' && showFormModal && (
             <CreateNewDocumentForm type='User' fields={newUserData} />

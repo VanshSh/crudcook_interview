@@ -94,7 +94,7 @@ const CreateNewDocumentForm = ({ fields, type }) => {
             status: validateForm(fields) ? '' : 'pointer-event-none',
             handleClick: handleSubmit,
             icon: '',
-            buttonTitle: 'Create user',
+            buttonTitle: `Create ${type}`,
             color: '#68ECED',
           }}
         />
