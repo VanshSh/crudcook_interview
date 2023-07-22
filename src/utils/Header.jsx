@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import { UseProjectContext } from '../store/context'
+import IncrementDecrement from '../IncrementDecrement'
 
 const Header = ({ props }) => {
   const { showFormModal, setShowFormModal } = UseProjectContext()
@@ -21,6 +22,7 @@ const Header = ({ props }) => {
           color: '#68ECED',
         }}
       />
+      {/* <IncrementDecrement /> */}
     </div>
   )
 }

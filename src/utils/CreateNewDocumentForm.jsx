@@ -21,6 +21,12 @@ const CreateNewDocumentForm = ({ fields, type }) => {
     setSelectClicked((prev) => !prev)
   }
   const handleChange = (e, fieldName) => {
+    const stringValueRegex = /^[a-zA-Z ]+$/
+    if (
+      (fieldName === 'phone' && stringValueRegex.test(e.target.value)) ||
+      e.target.value.length > 10
+    )
+      return
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: e.target.value,
@@ -47,6 +53,10 @@ const CreateNewDocumentForm = ({ fields, type }) => {
 
       if (pattern && !pattern.test(value)) {
         return false // Pattern mismatch
+      }
+
+      if (name === 'phone' && value.length !== 10) {
+        return false
       }
     }
 

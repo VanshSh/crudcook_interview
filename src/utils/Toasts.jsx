@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+
 import { UseProjectContext } from '../store/context'
 import Toast from 'react-bootstrap/Toast'
 
@@ -14,7 +13,7 @@ function Toasts() {
           style={{ background: 'none' }}
           onClose={() => setShowToast((prev) => ({ ...prev, show: false }))}
           show={showToast.show}
-          delay={2400}
+          delay={2000}
           autohide
         >
           <Toast.Body>

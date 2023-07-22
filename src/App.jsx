@@ -45,7 +45,7 @@ const App = () => {
       label: 'Phone no.',
       type: 'text',
       required: true,
-      validation: /^[0-9]+$/,
+      pattern: /^\d{10}$/,
     },
     {
       name: 'street',
